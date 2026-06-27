@@ -1,0 +1,69 @@
+# Shopu — Setup Guide (for complete beginners)
+
+This folder is your real, working app: sellers can sign up, build a shop, add products,
+and customers can buy with Paystack. Follow these steps in order.
+
+## Step 1: Create your accounts (if you haven't already)
+- Supabase: https://supabase.com → New Project → name it "shopu" → set a database password
+- Paystack: https://dashboard.paystack.com/#/signup
+- GitHub: https://github.com/signup
+- Vercel: https://vercel.com/signup (sign up using your GitHub account — easiest option)
+
+## Step 2: Set up your database
+1. In Supabase, open your project
+2. Click "SQL Editor" in the left sidebar
+3. Click "New query"
+4. Open `schema.sql` from this folder, copy everything, paste it in
+5. Click "Run"
+6. You should see "Success. No rows returned" — that means it worked
+
+## Step 3: Get your keys
+**Supabase keys:**
+1. In Supabase, click the gear icon (Project Settings) → "API"
+2. Copy the "Project URL"
+3. Copy the "anon public" key
+
+**Paystack key:**
+1. In Paystack dashboard, click Settings → "API Keys & Webhooks"
+2. Copy your "Public Key" — it starts with `pk_test_` (this is the TEST key, safe to use while building)
+
+## Step 4: Paste your keys into the app
+1. Open `config.js` in this folder
+2. Replace the three placeholder values with the keys you copied
+3. Save the file
+
+## Step 5: Put this on GitHub
+1. Go to https://github.com/new
+2. Name the repository `shopu`
+3. Don't check any boxes (no README, no .gitignore)
+4. Click "Create repository"
+5. On the next page, follow GitHub's instructions under "...or push an existing repository from the command line" — or simply drag-and-drop all the files from this folder into the GitHub page in your browser (GitHub supports uploading files directly through the website — look for "uploading an existing file" link on the new repo page)
+
+## Step 6: Deploy on Vercel
+1. Go to https://vercel.com/new
+2. Import the `shopu` repository you just created
+3. Leave all settings as default
+4. Click "Deploy"
+5. Wait about 1 minute — Vercel will give you a live URL like `shopu.vercel.app`
+
+## Step 7: Test it
+1. Open your live URL
+2. Click "Start your shop free" or any pricing button
+3. Sign up with your email
+4. Check your email for a confirmation link from Supabase, click it
+5. Log in, create your shop, add a product
+6. Copy your shop link and open it in a new tab — you should see your storefront
+7. Click "Buy now" on a product — use Paystack's test card to confirm payment works:
+   - Card number: 4084 0840 8408 4081
+   - Any future expiry date, any CVV, PIN: 0000, OTP: 123456
+
+## When you're ready to take real money
+- In Paystack, switch from Test Mode to Live Mode (top-left toggle in their dashboard)
+- Get your **Live** public key and replace the test key in `config.js`
+- Redeploy (Vercel auto-redeploys when you push changes to GitHub)
+- You'll also need to complete Paystack's business verification to receive real payouts
+
+## If something breaks
+- Open your browser's developer console (F12 or right-click → Inspect → Console tab) to see the error message
+- Most issues are: wrong keys pasted in `config.js`, or forgetting to run `schema.sql`
+- Come back here and paste me the exact error — I'll help you fix it
